@@ -176,10 +176,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-[#78350F] leading-tight">{currentWorksheet.title}</h2>
             <div className="flex items-center gap-3 text-xs text-[#92400E] font-bold mt-1">
-              <span className="bg-[#FEF3C7] px-2.5 py-0.5 rounded-full border border-[#F59E0B]">
-                {currentWorksheet.gradeLevel}
-              </span>
-              <span>• ⏱️ {currentWorksheet.estimatedTime}</span>
+              <span>⏱️ {currentWorksheet.estimatedTime}</span>
               <span>• 📝 {currentWorksheet.questions.length} Interactive Questions</span>
             </div>
           </div>
