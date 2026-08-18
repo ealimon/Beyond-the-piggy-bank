@@ -1,0 +1,6 @@
+{
+  "name": "Beyond the Piggy Bank: Financial Literacy & Worksheets",
+  "description": "An interactive financial literacy learning suite and printable worksheets based on Silas and Aunt Minty's story exploring inflation, compound interest, bank accounts, and savings engines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

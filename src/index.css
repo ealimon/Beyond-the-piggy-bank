@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #FFFBEB;
+    color: #1E293B;
+  }
+}
+
+@layer utilities {
+  @media print {
+    body {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    .print\:hidden {
+      display: none !important;
+    }
+    
+    .print\:bg-white {
+      background-color: #ffffff !important;
+    }
+    
+    .print\:text-black {
+      color: #000000 !important;
+    }
+  }
+}
+
