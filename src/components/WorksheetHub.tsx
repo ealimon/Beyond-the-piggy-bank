@@ -166,7 +166,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 py-4">
+    <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 py-4 print:p-0 print:m-0 print:max-w-full">
       {/* Print Controls Header (Hidden during physical print) */}
       <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 bg-white border-4 border-[#FDE68A] rounded-3xl p-5 shadow-lg">
         <div className="flex items-center gap-3.5">
@@ -249,9 +249,9 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
       </div>
 
       {/* Main Worksheet Container (Screen & Print Formatted) */}
-      <div className="bg-white print:bg-white border-4 border-[#FDE68A] print:border-none rounded-3xl p-6 sm:p-10 shadow-xl print:shadow-none text-slate-800 print:text-black">
+      <div className="worksheet-print-container bg-white print:bg-white border-4 border-[#FDE68A] print:border-none rounded-3xl p-6 sm:p-10 print:p-0 shadow-xl print:shadow-none text-slate-800 print:text-black">
         {/* Printable Classroom Header */}
-        <div className="border-b-4 border-[#FDE68A] print:border-black pb-6 mb-8">
+        <div className="print-avoid-break border-b-4 border-[#FDE68A] print:border-black pb-6 mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
             <div>
               <div className="flex items-center gap-2 text-[#D97706] print:text-amber-800 text-xs font-black uppercase tracking-widest">
@@ -318,7 +318,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
         )}
 
         {/* Questions List */}
-        <div className="space-y-8">
+        <div className="space-y-6 print:space-y-4">
           {currentWorksheet.questions.map((q) => {
             const userAns = answers[q.id];
             const isCorrect = isQuestionCorrect(q);
@@ -327,11 +327,11 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
               <div
                 key={q.id}
                 id={`question-box-${q.id}`}
-                className={`p-6 rounded-3xl border-4 transition-all ${
+                className={`worksheet-question-card p-6 print:p-4 rounded-3xl border-4 print:border-2 transition-all ${
                   isSubmitted
                     ? isCorrect
-                      ? 'bg-[#F0FDF4] border-[#22C55E] print:bg-gray-50 print:border-gray-400'
-                      : 'bg-[#FEF2F2] border-[#EF4444] print:bg-gray-50 print:border-gray-400'
+                      ? 'bg-[#F0FDF4] border-[#22C55E] print:bg-white print:border-gray-400'
+                      : 'bg-[#FEF2F2] border-[#EF4444] print:bg-white print:border-gray-400'
                     : 'bg-[#FFFBEB] print:bg-white border-[#FDE68A] print:border-gray-300'
                 }`}
               >
