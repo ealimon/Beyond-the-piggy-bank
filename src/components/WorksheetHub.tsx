@@ -251,34 +251,34 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
       {/* Main Worksheet Container (Screen & Print Formatted) */}
       <div className="worksheet-print-container bg-white print:bg-white border-4 border-[#FDE68A] print:border-none rounded-3xl p-6 sm:p-10 print:p-0 shadow-xl print:shadow-none text-slate-800 print:text-black">
         {/* Printable Classroom Header */}
-        <div className="print-avoid-break border-b-4 border-[#FDE68A] print:border-black pb-6 mb-6">
+        <div className="print-avoid-break border-b-4 border-[#FDE68A] print:border-b-2 print:border-black pb-4 mb-4">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
             <div>
               <div className="flex items-center gap-2 text-[#D97706] print:text-amber-800 text-xs font-black uppercase tracking-widest">
                 <Sparkles className="w-4 h-4" />
                 <span>BEYOND THE PIGGY BANK • FINANCIAL LITERACY WORKBOOK</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-[#78350F] print:text-black mt-1">
+              <h1 className="text-2xl sm:text-3xl print:text-xl font-black text-[#78350F] print:text-black mt-1">
                 {currentWorksheet.title}
               </h1>
-              <p className="text-sm font-medium text-[#92400E] print:text-gray-700 mt-1 max-w-2xl">
+              <p className="text-sm print:text-xs font-medium text-[#92400E] print:text-gray-700 mt-0.5 max-w-2xl">
                 {currentWorksheet.subtitle}
               </p>
             </div>
 
             {/* Student Info Lines for Print */}
-            <div className="w-full sm:w-64 bg-[#FEF3C7] print:bg-gray-100 p-4 rounded-2xl border-2 border-[#F59E0B] print:border-gray-300 text-xs space-y-2">
-              <div className="flex items-center justify-between font-bold text-[#78350F]">
+            <div className="w-full sm:w-64 print:w-56 bg-[#FEF3C7] print:bg-white p-4 print:p-2 rounded-2xl border-2 border-[#F59E0B] print:border-gray-400 text-xs space-y-1.5 print:space-y-1">
+              <div className="flex items-center justify-between font-bold text-[#78350F] print:text-black">
                 <span>Student Name:</span>
-                <div className="border-b-2 border-[#92400E] print:border-black w-32 h-4" />
+                <div className="border-b-2 border-[#92400E] print:border-black w-28 h-3.5" />
               </div>
-              <div className="flex items-center justify-between font-bold text-[#78350F]">
+              <div className="flex items-center justify-between font-bold text-[#78350F] print:text-black">
                 <span>Date:</span>
-                <div className="border-b-2 border-[#92400E] print:border-black w-32 h-4" />
+                <div className="border-b-2 border-[#92400E] print:border-black w-28 h-3.5" />
               </div>
-              <div className="flex items-center justify-between font-bold text-[#78350F]">
+              <div className="flex items-center justify-between font-bold text-[#78350F] print:text-black">
                 <span>Score / Grade:</span>
-                <div className="font-black text-[#D97706] print:text-black text-sm">
+                <div className="font-black text-[#D97706] print:text-black text-xs">
                   {isSubmitted ? `${calculateScore()} / ${currentWorksheet.questions.length}` : `___ / ${currentWorksheet.questions.length}`}
                 </div>
               </div>
@@ -286,11 +286,11 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
           </div>
 
           {/* Storybook Reference Banner */}
-          <div className="mt-4 p-4 rounded-2xl bg-[#E0F2FE] print:bg-amber-50 border-2 border-[#7DD3FC] print:border-amber-300 flex items-center justify-between text-xs text-[#0C4A6E] print:text-amber-900">
+          <div className="mt-3 p-3 print:py-1.5 print:px-2.5 rounded-2xl print:rounded-lg bg-[#E0F2FE] print:bg-gray-100 border-2 border-[#7DD3FC] print:border-gray-300 flex items-center justify-between text-xs print:text-[11px] text-[#0C4A6E] print:text-gray-800">
             <div className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-[#0284C7] print:text-amber-800 flex-shrink-0" />
+              <BookOpen className="w-4 h-4 text-[#0284C7] print:text-gray-700 flex-shrink-0" />
               <span className="font-medium">
-                <strong className="font-black text-[#0369A1]">Story Connection:</strong> {currentWorksheet.storybookConnection}
+                <strong className="font-black text-[#0369A1] print:text-black">Story Connection:</strong> {currentWorksheet.storybookConnection}
               </span>
             </div>
             <button
@@ -387,7 +387,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                 {/* Interactive Question Types */}
                 {/* 1. Multiple Choice */}
                 {q.type === 'multiple-choice' && q.options && (
-                  <div className="space-y-2.5">
+                  <div className="space-y-2.5 print:space-y-1.5">
                     {q.options.map((opt, optIdx) => {
                       const isSelected = userAns === optIdx;
                       const isCorrectOpt = optIdx === q.correctOptionIndex;
@@ -409,12 +409,12 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                           id={`btn-opt-${q.id}-${optIdx}`}
                           onClick={() => handleSelectAnswer(q.id, optIdx)}
                           disabled={isSubmitted}
-                          className={`w-full text-left p-3.5 rounded-2xl border transition-all flex items-start gap-3 ${optClass}`}
+                          className={`w-full text-left p-3.5 print:py-1.5 print:px-3 rounded-2xl print:rounded-lg border transition-all flex items-start gap-3 print:gap-2 ${optClass}`}
                         >
-                          <span className="w-6 h-6 rounded-full bg-[#FEF3C7] border-2 border-[#F59E0B] flex items-center justify-center flex-shrink-0 text-xs mt-0.5 font-black text-[#78350F]">
+                          <span className="w-6 h-6 print:w-5 print:h-5 rounded-full bg-[#FEF3C7] print:bg-gray-100 border-2 border-[#F59E0B] print:border-gray-400 flex items-center justify-center flex-shrink-0 text-xs print:text-[10px] mt-0.5 font-black text-[#78350F] print:text-black">
                             {String.fromCharCode(65 + optIdx)}
                           </span>
-                          <span className="flex-1 leading-snug font-semibold">{opt}</span>
+                          <span className="flex-1 leading-snug font-semibold text-sm print:text-xs">{opt}</span>
                           {showTeacherKey && isCorrectOpt && (
                             <span className="text-[10px] uppercase font-black bg-[#10B981] text-white px-2.5 py-0.5 rounded-full">
                               Correct
@@ -429,7 +429,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                 {/* 2. Number Input */}
                 {q.type === 'number-input' && (
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-                    <div className="relative flex-1 max-w-xs">
+                    <div className="relative flex-1 max-w-xs print:max-w-md">
                       <input
                         id={`input-number-${q.id}`}
                         type="number"
@@ -438,7 +438,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                         value={userAns ?? ''}
                         onChange={(e) => handleSelectAnswer(q.id, e.target.value)}
                         disabled={isSubmitted}
-                        className={`w-full px-4 py-3 rounded-2xl bg-white print:bg-white border-2 text-slate-900 print:text-black text-sm focus:outline-none focus:border-[#F59E0B] font-mono font-bold shadow-sm ${
+                        className={`w-full px-4 py-3 print:py-1.5 print:px-3 rounded-2xl print:rounded-lg bg-white print:bg-white border-2 text-slate-900 print:text-black text-sm print:text-xs focus:outline-none focus:border-[#F59E0B] font-mono font-bold shadow-sm ${
                           isSubmitted
                             ? isCorrect
                               ? 'border-[#22C55E] bg-[#DCFCE7] text-[#166534]'
@@ -448,7 +448,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                       />
                     </div>
                     {showTeacherKey && (
-                      <div className="text-xs text-[#166534] font-black bg-[#DCFCE7] px-4 py-2.5 rounded-2xl border-2 border-[#22C55E]">
+                      <div className="text-xs text-[#166534] font-black bg-[#DCFCE7] px-4 py-2.5 print:py-1 print:px-2.5 rounded-2xl print:rounded-lg border-2 border-[#22C55E]">
                         Correct Answer: {q.correctNumber}
                       </div>
                     )}
@@ -457,15 +457,16 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
 
                 {/* 3. Sorting Activity */}
                 {q.type === 'sorting' && q.sortingItems && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    {/* On screen: interactive drop buckets. On print: clean classroom table with checkboxes */}
+                    <div className="print:hidden grid grid-cols-1 md:grid-cols-2 gap-4">
                       {/* Bucket A: Piggy Bank */}
                       <div className="bg-[#FFF1F2] border-4 border-dashed border-[#F43F5E] rounded-3xl p-4">
                         <div className="flex items-center gap-2 mb-3 pb-2 border-b-2 border-[#FECDD3] text-[#9F1239] font-black text-sm">
                           <span>🐷</span>
                           <span>Ceramic Piggy Bank (Idle Cash)</span>
                         </div>
-                        <div className="space-y-2 min-h-[120px]">
+                        <div className="space-y-2 min-h-[100px]">
                           {q.sortingItems.map(item => {
                             const bucket = sortingState[item.id] || (userAns && userAns[item.id]);
                             if (bucket !== 'piggy') return null;
@@ -481,7 +482,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                             return (
                               <div
                                 key={item.id}
-                                className={`p-3 rounded-2xl border text-xs flex items-center justify-between shadow-sm ${itemStyle}`}
+                                className={`p-2.5 rounded-2xl border text-xs flex items-center justify-between shadow-sm ${itemStyle}`}
                               >
                                 <span className="font-bold">{item.text}</span>
                                 {!isSubmitted && (
@@ -505,7 +506,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                           <span>🏛️</span>
                           <span>Bank Account (Savings Engine)</span>
                         </div>
-                        <div className="space-y-2 min-h-[120px]">
+                        <div className="space-y-2 min-h-[100px]">
                           {q.sortingItems.map(item => {
                             const bucket = sortingState[item.id] || (userAns && userAns[item.id]);
                             if (bucket !== 'bank') return null;
@@ -521,7 +522,7 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                             return (
                               <div
                                 key={item.id}
-                                className={`p-3 rounded-2xl border text-xs flex items-center justify-between shadow-sm ${itemStyle}`}
+                                className={`p-2.5 rounded-2xl border text-xs flex items-center justify-between shadow-sm ${itemStyle}`}
                               >
                                 <span className="font-bold">{item.text}</span>
                                 {!isSubmitted && (
@@ -540,9 +541,48 @@ export const WorksheetHub: React.FC<WorksheetHubProps> = ({
                       </div>
                     </div>
 
-                    {/* Unsorted Pool */}
+                    {/* Printable Compact Worksheet Table for Sorting */}
+                    <div className="hidden print:block border border-gray-300 rounded-xl overflow-hidden my-2">
+                      <table className="w-full text-xs text-left border-collapse">
+                        <thead>
+                          <tr className="bg-gray-100 border-b border-gray-300">
+                            <th className="p-2 font-black text-gray-800">Feature / Description</th>
+                            <th className="p-2 text-center font-black text-gray-800 w-28 border-l border-gray-300">🐷 Piggy Bank</th>
+                            <th className="p-2 text-center font-black text-gray-800 w-28 border-l border-gray-300">🏛️ Bank Account</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {q.sortingItems.map((item, idx) => {
+                            const isPiggy = item.correctBucket === 'piggy';
+                            return (
+                              <tr key={item.id} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                                <td className="p-2 border-t border-gray-200 font-medium text-gray-900 leading-tight">
+                                  {item.text}
+                                </td>
+                                <td className="p-2 border-t border-l border-gray-200 text-center">
+                                  {showTeacherKey && isPiggy ? (
+                                    <span className="font-black text-emerald-700">✓ [X]</span>
+                                  ) : (
+                                    <div className="w-4 h-4 border-2 border-gray-400 rounded inline-block"></div>
+                                  )}
+                                </td>
+                                <td className="p-2 border-t border-l border-gray-200 text-center">
+                                  {showTeacherKey && !isPiggy ? (
+                                    <span className="font-black text-emerald-700">✓ [X]</span>
+                                  ) : (
+                                    <div className="w-4 h-4 border-2 border-gray-400 rounded inline-block"></div>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Unsorted Pool (Screen Only) */}
                     {!isSubmitted && (
-                      <div className="p-4 bg-[#FEF3C7] rounded-3xl border-2 border-[#F59E0B]">
+                      <div className="print:hidden p-4 bg-[#FEF3C7] rounded-3xl border-2 border-[#F59E0B]">
                         <span className="text-xs text-[#78350F] font-black mb-2 block">
                           👇 Click a bucket to place each item:
                         </span>
