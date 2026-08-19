@@ -5,8 +5,6 @@ import {
   ChevronRight, 
   BookOpen, 
   Sparkles, 
-  Volume2, 
-  VolumeX, 
   FileText, 
   Lightbulb, 
   Award, 
@@ -31,44 +29,17 @@ export const StorybookReader: React.FC<StorybookReaderProps> = ({
 }) => {
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const [selectedConcept, setSelectedConcept] = useState<StoryPage['keyConcepts'][0] | null>(null);
-  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
 
   const page = STORYBOOK_PAGES[currentPageIndex];
 
-  // Stop speech when changing pages
+  // Reset local state when changing pages
   useEffect(() => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    }
     setQuizAnswer(null);
     setQuizSubmitted(false);
     setSelectedConcept(null);
   }, [currentPageIndex]);
-
-  const handleToggleSpeak = () => {
-    if (!('speechSynthesis' in window)) {
-      alert("Text-to-speech is not supported on this browser.");
-      return;
-    }
-
-    if (isSpeaking) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    } else {
-      window.speechSynthesis.cancel();
-      const cleanText = page.text.replace(/[\n\r]+/g, ' ');
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.rate = 0.92; // warm storytelling pace
-      utterance.pitch = 1.05;
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-      setIsSpeaking(true);
-    }
-  };
 
   const getPageIcon = (pageNo: number) => {
     switch (pageNo) {
@@ -112,29 +83,15 @@ export const StorybookReader: React.FC<StorybookReaderProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs uppercase font-black tracking-wider text-[#92400E] bg-[#FEF3C7] px-3 py-0.5 rounded-full border border-[#F59E0B]">
-                Chapter {page.pageNumber} of {STORYBOOK_PAGES.length}
+                Page {page.pageNumber} of {STORYBOOK_PAGES.length}
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-[#78350F] mt-1">{page.sceneTitle}</h2>
           </div>
         </div>
 
-        {/* Read-Aloud & Worksheet Shortcut Buttons */}
+        {/* Worksheet Shortcut Button */}
         <div className="flex items-center gap-2 flex-wrap">
-          <button
-            id="btn-read-aloud"
-            onClick={handleToggleSpeak}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs sm:text-sm font-black transition-all ${
-              isSpeaking
-                ? 'bg-[#EF4444] text-white border-b-4 border-[#B91C1C] shadow-md animate-pulse'
-                : 'bg-[#FEF3C7] hover:bg-[#FDE68A] text-[#78350F] border-2 border-[#F59E0B]'
-            }`}
-            title="Listen to story page aloud"
-          >
-            {isSpeaking ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#D97706]" />}
-            <span>{isSpeaking ? "Pause Reading" : "Read to Me 🔊"}</span>
-          </button>
-
           <button
             id="btn-open-related-worksheet"
             onClick={() => onNavigateToWorksheet(getMatchingWorksheetId(page.pageNumber))}

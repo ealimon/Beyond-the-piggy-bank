@@ -10,7 +10,7 @@ export const WORKSHEETS_DATA: Worksheet[] = [
     relatedPages: [1, 2, 3],
     icon: "PiggyBank",
     conceptSummary: "Idle cash in a ceramic piggy bank stays safe from being spent, but it doesn't earn any interest and loses value as prices rise (inflation).",
-    storybookConnection: "In Chapter 1-3, Silas shakes his heavy pig 'Belly' and realizes that despite being full, the telescope price is slipping away.",
+    storybookConnection: "On Pages 1-3, Silas shakes his heavy pig 'Belly' and realizes that despite being full, the telescope price is slipping away.",
     questions: [
       {
         id: "ws1-q1",
